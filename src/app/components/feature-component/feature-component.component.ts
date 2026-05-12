@@ -9,7 +9,6 @@ import {Feature} from "../../model/feature";
 export class FeatureComponentComponent implements OnChanges, OnInit, DoCheck, AfterViewInit , OnDestroy{
 
   @Input() feature!: Feature;
-  @Input() name!: string;
 
   constructor() {
     console.log("Feature Component Created");

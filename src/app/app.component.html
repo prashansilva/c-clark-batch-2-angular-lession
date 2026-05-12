@@ -1,22 +1,29 @@
-<div class="app-header">
+<div class="container-fluid main-page">
+
+  <!-- Header -->
   <app-header-component></app-header-component>
-</div>
-<div class="app-body">
-  <div class="app-sidebar">
-    <app-sidebar-component></app-sidebar-component>
+
+  <!-- Navigation -->
+  <div class="top-nav">
+    <a>Home</a>
+    <a>Shop</a>
+    <a>Deals</a>
+    <a>New Arrivals</a>
+    <a>Best Sellers</a>
+    <a>Contact Us</a>
   </div>
-  <div class="app-content">
-    <div class="app-navbar">
-      <app-navbar-component></app-navbar-component>
+
+  <div class="content-area">
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <app-sidebar-component></app-sidebar-component>
     </div>
-    <div class="app-hero">
-      <app-hero-component></app-hero-component>
-    </div>
-    <div class="app-features">
-      <app-features-component></app-features-component>
-    </div>
-    <div class="app-featured-products">
-      <app-featured-products-component></app-featured-products-component>
+
+    <!-- Main Content -->
+    <div class="main-content">
+      <router-outlet></router-outlet>
     </div>
   </div>
+
 </div>

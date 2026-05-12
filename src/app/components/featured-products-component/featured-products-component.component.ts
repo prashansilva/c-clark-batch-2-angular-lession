@@ -7,4 +7,26 @@ import { Component } from '@angular/core';
 })
 export class FeaturedProductsComponentComponent {
 
+  products = [
+    {
+      name: 'Wireless Headphones',
+      price: 59.99,
+      image: 'assets/products/headphone.png'
+    },
+    {
+      name: 'Smart Watch',
+      price: 129.99,
+      image: 'assets/products/watch.png'
+    },
+    {
+      name: 'Camera',
+      price: 499.99,
+      image: 'assets/products/camera.png'
+    },
+    {
+      name: 'Backpack',
+      price: 39.99,
+      image: 'assets/products/bag.png'
+    }
+  ];
 }
