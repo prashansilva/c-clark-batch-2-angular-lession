@@ -13,6 +13,11 @@ import { FeatureComponentComponent } from './components/feature-component/featur
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatIconModule} from "@angular/material/icon";
+import { DealsComponent } from './components/deals/deals.component';
+import { NewArrivalsComponent } from './components/new-arrivals/new-arrivals.component';
+import { BestSellersComponent } from './components/best-sellers/best-sellers.component';
+import { ContactUsComponent } from './components/contact-us/contact-us.component';
+import {ShopModule} from "./modules/shop/shop.module";
 
 @NgModule({
   declarations: [
@@ -25,12 +30,17 @@ import {MatIconModule} from "@angular/material/icon";
     FeaturedProductsComponentComponent,
     FeatureComponentComponent,
     DashboardComponent,
+    DealsComponent,
+    NewArrivalsComponent,
+    BestSellersComponent,
+    ContactUsComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MatIconModule
+    MatIconModule,
+    ShopModule
   ],
   providers: [],
   bootstrap: [AppComponent]
