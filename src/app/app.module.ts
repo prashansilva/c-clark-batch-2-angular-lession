@@ -19,7 +19,8 @@ import { BestSellersComponent } from './components/best-sellers/best-sellers.com
 import { ContactUsComponent } from './components/contact-us/contact-us.component';
 import {ShopModule} from "./modules/shop/shop.module";
 import {ShopService} from "./modules/shop/shop.service";
-import {provideHttpClient} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule, provideHttpClient} from "@angular/common/http";
+import {AuthInterceptor} from "./auth.interceptor";
 
 @NgModule({
   declarations: [
@@ -41,9 +42,17 @@ import {provideHttpClient} from "@angular/common/http";
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MatIconModule
+    MatIconModule,
+    HttpClientModule,
   ],
-  providers: [ ShopService , provideHttpClient() ],
+  providers: [
+    ShopService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true,
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

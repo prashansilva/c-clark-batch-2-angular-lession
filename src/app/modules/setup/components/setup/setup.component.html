@@ -1,0 +1,53 @@
+<h1>Template Driven Form</h1>
+
+<form #productSetupForm="ngForm" (ngSubmit)="onSubmit(productSetupForm)">
+
+  <input id="title" name="title" required  [(ngModel)]="product.title" #title="ngModel"/>
+  <input id="description" name="description" required  ngModel #description="ngModel"/>
+
+  <select  id="category" name="category" ngModel #category="ngModel" required>
+    <option [ngValue]="null">Select category</option>
+    <option *ngFor="let c of categories" [ngValue]="c.id">
+      {{ c.name }}
+    </option>
+  </select>
+  <p *ngIf="category.valid"></p>
+  <input id="price" name="price" required ngModel #price="ngModel"/>
+  <p *ngIf="price.invalid && price.touched">Price is Required</p>
+
+
+  <div ngModelGroup="address">
+    <input id="no" name="no" required  ngModel #no="ngModel"/>
+    <input id="street" name="street" required  ngModel #street="ngModel"/>
+    <input id="city" name="city" required  ngModel #city="ngModel"/>
+    <input id="country" name="country" required  ngModel #country="ngModel"/>
+  </div>
+
+  <div ngModelGroup="supplier">
+    <input id="name" name="name" placeholder="name" required [minlength]="10" ngModel #name="ngModel"/>
+
+    <p *ngIf="name.touched && name.invalid">
+      Supplier Name is Required with length
+    </p>
+
+    <p *ngIf="name.errors?.['required'] && name.touched">
+      Supplier Name is Required
+    </p>
+
+    <p *ngIf="name.errors?.['minlength'] && name.touched">
+      Supplier Name is Required 10 characters
+    </p>
+
+    <div ngModelGroup="address">
+      <input id="no" name="no" required  placeholder="no"  ngModel #supplierAddressNo="ngModel"/>
+      <p *ngIf="supplierAddressNo.touched && supplierAddressNo.invalid">
+        Supplier Address No is Required
+      </p>
+      <input id="street" name="street" required  placeholder="street" ngModel #street="ngModel"/>
+      <input id="city" name="city" required   placeholder="city"  ngModel #city="ngModel"/>
+      <input id="country" name="country" required  ngModel #country="ngModel"/>
+    </div>
+  </div>
+
+  <button type="submit">Submit</button>
+</form>
