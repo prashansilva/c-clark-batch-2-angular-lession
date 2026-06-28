@@ -19,6 +19,7 @@ import { BestSellersComponent } from './components/best-sellers/best-sellers.com
 import { ContactUsComponent } from './components/contact-us/contact-us.component';
 import {ShopModule} from "./modules/shop/shop.module";
 import {ShopService} from "./modules/shop/shop.service";
+import {provideHttpClient} from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -42,7 +43,7 @@ import {ShopService} from "./modules/shop/shop.service";
     BrowserAnimationsModule,
     MatIconModule
   ],
-  providers: [ ShopService ],
+  providers: [ ShopService , provideHttpClient() ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

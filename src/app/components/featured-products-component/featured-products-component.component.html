@@ -6,9 +6,9 @@
 
   <div class="product-card" *ngFor="let product of products">
 
-    <img [src]="product.image" alt="">
+    <img [src]="product.thumbnail" alt="">
 
-    <h5>{{ product.name }}</h5>
+    <h5>{{ product.title }}</h5>
 
     <div class="price">
       ${{ product.price }}

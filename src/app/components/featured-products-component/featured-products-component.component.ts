@@ -10,11 +10,16 @@ export class FeaturedProductsComponentComponent implements OnInit {
 
   products: Product[] = []
 
+
   constructor( private productService: ProductServiceService) {
   }
 
   ngOnInit() {
 
-    this.products = this.productService.getFeaturedProducts()
+    this.productService.getFeaturedProducts().subscribe(
+      ( response: Product[] ) => {
+      console.log( response );
+      this.products = response;
+    })
   }
 }

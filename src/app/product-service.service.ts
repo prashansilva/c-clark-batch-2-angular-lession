@@ -1,96 +1,29 @@
 import { Injectable } from '@angular/core';
+import {HttpClient, HttpParams} from "@angular/common/http";
+import {map, Observable} from "rxjs";
+import {ApiService} from "./api.service";
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductServiceService {
 
-  products : Product[] = [
-    {
-      id: 1,
-      name: 'Wireless Headphones',
-      image: 'assets/products/headphones.png',
-      price: 59.99,
-      oldPrice: 89.99,
-      tag: 'NEW',
-      category: 'electronic',
-      rating: 4.5,
-    },
-    {
-      id: 2,
-      name: 'Smart Watch Series 5',
-      image: 'assets/products/watch.png',
-      price: 129.99,
-      oldPrice: 199.99,
-      tag: 'SALE',
-      category: 'electronic',
-      rating: 1.5,
-    },
-    {
-      id: 3,
-      name: 'Digital Camera',
-      image: 'assets/products/camera.png',
-      price: 499.99,
-      oldPrice: 699.99,
-      tag: 'HOT',
-      category: 'electronic',
-      rating: 3.5,
-    },
-    {
-      id: 4,
-      name: 'Stylish Backpack',
-      image: 'assets/products/bag.png',
-      price: 39.99,
-      oldPrice: 59.99,
-      tag: '',
-      category: 'fashion',
-      rating: 2.5,
-    },
-    {
-      id: 5,
-      name: 'Sport Shoes',
-      image: 'assets/products/shoes.png',
-      price: 49.99,
-      oldPrice: 79.99,
-      tag: '',
-      category: 'fashion',
-      rating: 5,
-    },
-    {
-      id: 6,
-      name: 'Luxury Perfume',
-      image: 'assets/products/perfume.png',
-      price: 29.99,
-      oldPrice: 49.99,
-      tag: '',
-      category: 'cosmetic',
-      rating: 4.5,
-    },
-    {
-      id: 7,
-      name: 'Wireless Earbuds',
-      image: 'assets/products/earbuds.png',
-      price: 39.99,
-      oldPrice: 69.99,
-      tag: '',
-      category: 'electronic',
-      rating: 2.5,
-    },
-    {
-      id: 8,
-      name: 'Classic Sunglasses',
-      image: 'assets/products/glasses.png',
-      price: 19.99,
-      oldPrice: 29.99,
-      tag: '',
-      category: 'fashion',
-      rating: 3.5,
-    }
-  ];
+  products : Product[] = [];
   counter = 0;
 
-  constructor() {
+  constructor( private apiService: ApiService ) {
     console.log("Product Service Created");
+    this.loadProducts();
+  }
+
+  loadProducts(): void {
+    console.log("Loading Products");
+    this.apiService.apiGet("/products").subscribe( (value: any) => {
+      if( value && value.products ) {
+        this.products = value.products;
+        console.log(this.products);
+      }
+    })
   }
 
   getAllProducts() {
@@ -110,8 +43,29 @@ export class ProductServiceService {
     );
   }
 
-  getFeaturedProducts() {
-    return this.products.filter(item => item.tag === 'NEW');
+  getFeaturedProducts() : Observable<Product[]> {
+    return this.apiService.apiGet<Product[]>("/products" ).pipe(
+      map( (response: any) => response.products)
+    )
+  }
+
+  getProductById(id: number): Observable<Product> {
+    return this.apiService.apiGet<Product>(`/products/${id}` );
+  }
+
+  getProductsByCategory( category: string) :Observable<Product[]> {
+    if( category  ) {
+      return this.apiService.apiGet<Product[]>(
+        `/products/category/${category}` ).pipe(
+        map( (response: any) => response.products)
+      )
+    } else {
+      return this.apiService.apiGet<Product[]>(
+        `/products` ).pipe(
+        map( (response: any) => response.products)
+      )
+    }
+
   }
 
   increaseCounter() {
@@ -125,13 +79,15 @@ export class ProductServiceService {
 
 export interface Product {
   id: number;
-  name: string;
-  image: string;
-  price: number;
-  oldPrice: number;
-  tag: string;
+  title: string;
+  description: string;
   category: string;
+  price: number;
+  discountPercentage: string;
   rating: number;
+  stock: number;
+  tags: string[];
+  thumbnail: string;
 }
 
 export interface ProductFilter {

@@ -58,24 +58,18 @@
     *ngFor="let product of displayProducts"
   >
 
-        <span
-          class="tag"
-          *ngIf="product.tag"
-        >
-          {{ product.tag }}
-        </span>
 
     <button class="wishlist">
       <mat-icon>favorite_border</mat-icon>
     </button>
 
     <img
-      (click)="navigateToProduct(product.id)"
-      [src]="product.image"
-      [alt]="product.name"
+      (click)="navigateToProduct(product)"
+      [src]="product.thumbnail"
+      [alt]="product.title"
     >
 
-    <h4>{{ product.name }}</h4>
+    <h4>{{ product.title }}</h4>
 
     <div class="rating">
       ★★★★☆
@@ -86,10 +80,6 @@
 
           <span class="new-price">
             ${{ product.price }}
-          </span>
-
-      <span class="old-price">
-            ${{ product.oldPrice }}
           </span>
 
     </div>

@@ -36,14 +36,16 @@ export class ShopComponent implements OnInit {
         minPrice: Number(minPrice),
         maxPrice: Number(maxPrice),
       }
-      console.log( filter)
-      this.displayProducts =
-        this.productService.getFilteredProducts(filter);
+      console.log( filter);
+      this.productService.getProductsByCategory(category)
+        .subscribe( (response: any) => {
+        this.displayProducts = response
+      });
     })
   }
 
-  public navigateToProduct(id: number) {
-    this.navigation.navigate(['/shop/product', 'furniture',id]);
+  public navigateToProduct(product: Product) {
+    this.navigation.navigate(['/shop/product', product.id]);
   }
 
   public increment() {
