@@ -2,8 +2,11 @@
 
 <form #productSetupForm="ngForm" (ngSubmit)="onSubmit(productSetupForm)">
 
-  <input id="title" name="title" required  [(ngModel)]="product.title" #title="ngModel"/>
-  <input id="description" name="description" required  ngModel #description="ngModel"/>
+  <input appCustomValidation id="title" name="title" [(ngModel)]="product.title" #title="ngModel"/>
+
+  <p *ngIf="title.invalid">Title is Required</p>
+
+  <input appCustomValidation id="description" name="description" required  ngModel #description="ngModel"/>
 
   <select  id="category" name="category" ngModel #category="ngModel" required>
     <option [ngValue]="null">Select category</option>
@@ -48,6 +51,24 @@
       <input id="country" name="country" required  ngModel #country="ngModel"/>
     </div>
   </div>
+
+  <div
+   *ngFor="let productSkill of product.skills; index as index">
+    <input
+      required
+      [minlength]="5" [id]="'skill' + index"
+      [name]="'skill' + index" [(ngModel)]="productSkill.name"
+      #skill="ngModel"/>
+    <button type="button" (click)="removeSkill(index)">Remove</button>
+    <p *ngIf="skill.invalid && skill.touched">
+     Skill {{ index }} is Required
+    </p>
+  </div>
+
+  <button type="button" (click)="addSkill()">Add</button>
+
+
+
 
   <button type="submit">Submit</button>
 </form>

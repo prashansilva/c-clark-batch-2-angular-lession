@@ -21,7 +21,8 @@ export class SetupComponent {
       street: "sda",
       city: "Moratuwa",
       country: "Sri Lanka",
-    }
+    },
+    skills: []
 
   }
 
@@ -44,6 +45,15 @@ export class SetupComponent {
 
    console.log( this.product)
   }
+
+  addSkill() {
+    const skill: Skill = { name: ""}
+    this.product.skills.push( skill );
+  }
+
+  removeSkill( index: number ) {
+    this.product.skills.splice(index, 1);
+  }
 }
 
 
@@ -55,5 +65,10 @@ export interface ProductForm {
     street: string;
     city: string;
     country: string;
-  }
+  },
+  skills: Skill[]
+}
+
+export interface Skill {
+  name: string;
 }
