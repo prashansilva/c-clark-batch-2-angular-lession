@@ -35,3 +35,50 @@
 
   <button type="submit">Submit</button>
 </form>
+
+
+
+<form
+  [formGroup]="applicationForm"
+  (ngSubmit)="onSubmitApplication()"
+>
+  <label for="name">Name</label>
+  <input id="name" type="text" formControlName="name">
+
+  <label for="age">Age</label>
+  <input id="age" type="text" formControlName="age">
+
+  <div formGroupName="address">
+    <label for="street">Street</label>
+    <input id="street" type="text" formControlName="street">
+
+
+    <label for="city">City</label>
+    <input id="city" type="text" formControlName="city">
+
+    <label for="country">Country</label>
+    <input id="country" type="text" formControlName="country">
+
+    <label for="zip">Zip</label>
+    <input id="zip" type="text" formControlName="zip">
+    <p *ngIf="applicationForm.controls?.address?.controls?.zip?.invalid">
+      <span *ngIf="applicationForm.controls?.address?.controls?.zip?.hasError('required')">Zip is required</span>
+      <span *ngIf="applicationForm.controls?.address?.controls?.zip?.hasError('maxlength')">Zip max length 6</span>
+    </p>
+  </div>
+
+  <div formArrayName="skills">
+    <div *ngFor="let skill of getSkills(); index as index">
+      <div [formGroup]="skill">
+        <label [for]="'skillName_'+index">Name</label>
+        <input [id]="'skillName_'+index" type="text" formControlName="name">
+        <label [for]="'skillValue_'+index">Value</label>
+        <input [id]="'skillValue_'+index" type="text" formControlName="value">
+      </div>
+    </div>
+  </div>
+
+  <button type="button" (click)="addNewSkill()">Add New Skill</button>
+
+  <button type="submit">Submit</button>
+</form>
