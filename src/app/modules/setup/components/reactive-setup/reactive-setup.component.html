@@ -1,0 +1,37 @@
+<p>reactive-setup works!</p>
+
+
+<input [formControl]="nameField" >
+
+
+<p>{{ nameField.value }}</p>
+<p *ngIf="nameField.invalid">
+  <span *ngIf="nameField.hasError('required')">Name is required</span>
+  <span *ngIf="nameField.hasError('minlength')">Name is required min length 6</span>
+</p>
+
+
+<form
+ [formGroup]="addressForm"
+ (ngSubmit)="onSubmit()"
+>
+
+  <label for="street">Street</label>
+  <input id="street" type="text" formControlName="street">
+
+
+  <label for="city">City</label>
+  <input id="city" type="text" formControlName="city">
+
+  <label for="country">Country</label>
+  <input id="country" type="text" formControlName="country">
+
+  <label for="zip">Zip</label>
+  <input id="zip" type="text" formControlName="zip">
+  <p *ngIf="addressForm.controls?.zip?.invalid">
+    <span *ngIf="addressForm.controls?.zip?.hasError('required')">Zip is required</span>
+    <span *ngIf="addressForm.controls?.zip?.hasError('maxlength')">Zip max length 6</span>
+  </p>
+
+  <button type="submit">Submit</button>
+</form>
