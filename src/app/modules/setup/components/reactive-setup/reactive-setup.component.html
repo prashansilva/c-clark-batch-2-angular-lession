@@ -85,7 +85,7 @@
 
 
 
-<form [formGroup]="studentFrom" (ngSubmit)="onSubmitStudentForm()">
+<form [formGroup]="studentFrom" (ngSubmit)="onSubmitStudentForm()"  (reset)="onStudentReset()">
 
   <label for="username">User Name</label>
   <input id="username" type="text" formControlName="username">
@@ -153,4 +153,5 @@
 
 
   <button type="submit">Submit</button>
+  <button type="reset">Reset</button>
 </form>

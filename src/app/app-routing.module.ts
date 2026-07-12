@@ -11,6 +11,7 @@ const routes: Routes = [
   { path :'shop' , loadChildren: () => import('./modules/shop/shop.module').then(m => m.ShopModule) },
   { path :'deals' , loadChildren: () => import('./modules/deals/deals.module').then(m => m.DealsModule)},
   { path: 'setups' , loadChildren: () => import('./modules/setup/setup.module').then(m => m.SetupModule)},
+  { path: 'rxjs', loadChildren: () => import('./modules/rxjs/rxjs.module').then(m => m.RxjsModule)},
   { path :'new-arrivals' , component : NewArrivalsComponent},
   { path :'best-sellers' , component : BestSellersComponent},
   { path :'contact-us' , component : ContactUsComponent},
