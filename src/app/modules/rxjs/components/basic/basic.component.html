@@ -1,1 +1,19 @@
 <p>basic works!</p>
+
+<input [formControl]="name" type="text">
+
+<button id="save"></button>
+
+<p> Latest value : {{ numbers$ | async }}</p>
+
+<ul>
+  <li *ngFor="let number of numbers">
+    {{ number }}
+  </li>
+</ul>
+
+<ul>
+  <li *ngFor="let number of numberWhile">
+    {{ number }}
+  </li>
+</ul>

@@ -52,6 +52,12 @@ export class ReactiveSetupComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+
+    this.userService.userSubject.subscribe( value => {
+
+      console.log(value)
+    })
+
      this.username?.valueChanges.subscribe(value => {
        console.log(value)
      })
