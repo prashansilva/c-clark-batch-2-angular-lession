@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {customValidator} from "../../validations/custom.validator";
 import {parameterValidator} from "../../validations/parameter.validator";
+import {passwordStrengthValidator} from "../../validations/password-strength.validator";
 
 @Component({
   selector: 'app-reactive-setup',
@@ -50,7 +51,7 @@ export class ReactiveSetupComponent {
     firstName: ['', [Validators.required, customValidator] ],
     lastName: ['', Validators.required],
     email: ['', [ Validators.required, Validators.email , parameterValidator(["gmail" , "yahoo"]) ]],
-    password: ['', Validators.required],
+    password: ['', [Validators.required , passwordStrengthValidator ]],
     address: this.fb.group({
       street: ['', Validators.required],
       city: ['', Validators.required],
