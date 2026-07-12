@@ -98,6 +98,10 @@
     User name is already taken
   </small>
 
+  <small *ngIf="username?.valid ">
+    {{ username?.value }} is Available
+  </small>
+
   <label for="firstName">First Name</label>
   <input id="firstName" type="text" formControlName="firstName">
 

@@ -4,6 +4,8 @@ import {customValidator} from "../../validations/custom.validator";
 import {parameterValidator} from "../../validations/parameter.validator";
 import {passwordStrengthValidator} from "../../validations/password-strength.validator";
 import {usernameValidator} from "../../validations/asynchronus.validator";
+import {UserService} from "../../../../user.service";
+import {usernameExistsValidator} from "../../validations/username-check.validator";
 
 @Component({
   selector: 'app-reactive-setup',
@@ -44,7 +46,8 @@ export class ReactiveSetupComponent {
   )
 
   constructor(
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private userService: UserService,
   ) { }
 
 
@@ -52,8 +55,8 @@ export class ReactiveSetupComponent {
     username: [
       '',
       {
-       validators: [Validators.required],
-       asyncValidators: [usernameValidator],
+       validators: [Validators.required, passwordStrengthValidator],
+       asyncValidators: [usernameExistsValidator(this.userService)],
        updateOn: 'blur'
       }
     ],
