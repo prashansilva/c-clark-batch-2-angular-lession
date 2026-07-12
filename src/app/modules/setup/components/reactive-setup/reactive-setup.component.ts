@@ -1,5 +1,7 @@
 import {Component} from '@angular/core';
-import {FormArray, FormControl, FormGroup, Validators} from "@angular/forms";
+import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {customValidator} from "../../validations/custom.validator";
+import {parameterValidator} from "../../validations/parameter.validator";
 
 @Component({
   selector: 'app-reactive-setup',
@@ -39,7 +41,23 @@ export class ReactiveSetupComponent {
     }
   )
 
-  constructor() { }
+  constructor(
+    private fb: FormBuilder
+  ) { }
+
+
+  studentFrom = this.fb.group({
+    firstName: ['', [Validators.required, customValidator] ],
+    lastName: ['', Validators.required],
+    email: ['', [ Validators.required, Validators.email , parameterValidator(["gmail" , "yahoo"]) ]],
+    password: ['', Validators.required],
+    address: this.fb.group({
+      street: ['', Validators.required],
+      city: ['', Validators.required],
+      country: ['', Validators.required],
+      zip: ['', Validators.required],
+    })
+  })
 
   onSubmit() {
     this.addressForm.markAsTouched();
@@ -57,6 +75,17 @@ export class ReactiveSetupComponent {
     if( this.applicationForm.valid) {
       console.log( "Valid" );
       console.log( this.applicationForm.value );
+    } else {
+      console.log( "Invalid" );
+    }
+  }
+
+  onSubmitStudentForm() {
+    this.studentFrom.markAsTouched();
+    console.log( this.studentFrom)
+    if( this.studentFrom.valid) {
+      console.log( "Valid" );
+      console.log( this.studentFrom.value );
     } else {
       console.log( "Invalid" );
     }
@@ -87,6 +116,11 @@ export class ReactiveSetupComponent {
 
 
 type SkillForm = FormGroup<{
+  name: FormControl<string>;
+  value: FormControl<string>;
+}>;
+
+type CourseForm = FormGroup<{
   name: FormControl<string>;
   value: FormControl<string>;
 }>;
