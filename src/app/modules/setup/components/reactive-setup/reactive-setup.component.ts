@@ -113,6 +113,10 @@ export class ReactiveSetupComponent {
     this.applicationForm.controls.skills.push(this.createSkill());
   }
 
+  get studentPassword() {
+    return this.studentFrom.get('password');
+  }
+
 }
 
 
