@@ -129,6 +129,13 @@
     </span>
   </small>
 
+  <label for="confirmPassword">Confirm Password</label>
+  <input id="confirmPassword" type="password" formControlName="confirmPassword">
+
+  <small *ngIf="studentFrom?.hasError('passMismatch')">
+    {{ studentFrom?.getError('passMismatch')?.message }}
+  </small>
+
   <div formGroupName="address">
     <label for="street">Street</label>
     <input id="street" type="text" formControlName="street">

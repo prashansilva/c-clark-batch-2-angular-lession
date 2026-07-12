@@ -6,6 +6,7 @@ import {passwordStrengthValidator} from "../../validations/password-strength.val
 import {usernameValidator} from "../../validations/asynchronus.validator";
 import {UserService} from "../../../../user.service";
 import {usernameExistsValidator} from "../../validations/username-check.validator";
+import {passwordMatchValidator} from "../../validations/password-match.validator";
 
 @Component({
   selector: 'app-reactive-setup',
@@ -51,26 +52,34 @@ export class ReactiveSetupComponent {
   ) { }
 
 
-  studentFrom = this.fb.group({
-    username: [
-      '',
+  studentFrom = this.fb.group(
       {
-       validators: [Validators.required, passwordStrengthValidator],
-       asyncValidators: [usernameExistsValidator(this.userService)],
-       updateOn: 'blur'
-      }
-    ],
-    firstName: ['', [Validators.required, customValidator] ],
-    lastName: ['', Validators.required],
-    email: ['', [ Validators.required, Validators.email , parameterValidator(["gmail" , "yahoo"]) ]],
-    password: ['', [Validators.required , passwordStrengthValidator ]],
-    address: this.fb.group({
-      street: ['', Validators.required],
-      city: ['', Validators.required],
-      country: ['', Validators.required],
-      zip: ['', Validators.required],
-    })
-  })
+      username: [
+        '',
+        {
+         validators: [Validators.required, passwordStrengthValidator],
+         asyncValidators: [usernameExistsValidator(this.userService)],
+         updateOn: 'blur'
+        }
+      ],
+      firstName: ['', [Validators.required, customValidator] ],
+      lastName: ['', Validators.required],
+      email: ['', [ Validators.required, Validators.email , parameterValidator(["gmail" , "yahoo"]) ]],
+      password: ['', [Validators.required , passwordStrengthValidator ]],
+      confirmPassword: ['', [Validators.required, passwordStrengthValidator ]],
+      address: this.fb.group({
+        street: ['', Validators.required],
+        city: ['', Validators.required],
+        country: ['', Validators.required],
+        zip: ['', Validators.required],
+      }),
+    },
+    {
+      validators: [
+        passwordMatchValidator
+      ]
+    }
+    )
 
   onSubmit() {
     this.addressForm.markAsTouched();
