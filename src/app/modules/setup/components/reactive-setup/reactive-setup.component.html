@@ -86,6 +86,18 @@
 
 
 <form [formGroup]="studentFrom" (ngSubmit)="onSubmitStudentForm()">
+
+  <label for="username">User Name</label>
+  <input id="username" type="text" formControlName="username">
+
+  <small *ngIf="username?.pending">
+    Checking username validity
+  </small>
+
+  <small *ngIf="username?.hasError('usernameTaken')">
+    User name is already taken
+  </small>
+
   <label for="firstName">First Name</label>
   <input id="firstName" type="text" formControlName="firstName">
 
@@ -97,6 +109,21 @@
 
   <label for="password">Password</label>
   <input id="password" type="password" formControlName="password">
+
+  <small *ngIf="studentPassword?.hasError('passwordStrength')">
+    <span *ngIf="!studentPassword?.getError('passwordStrength')?.hasUpperCase?.valid">
+      {{ studentPassword?.getError('passwordStrength')?.hasUpperCase?.message }}
+    </span>
+    <span *ngIf="!studentPassword?.getError('passwordStrength')?.hasLowerCase">
+      Password must contain lower case character
+    </span>
+    <span *ngIf="!studentPassword?.getError('passwordStrength')?.hasNumber">
+      Password must contain a number
+    </span>
+    <span *ngIf="!studentPassword?.getError('passwordStrength')?.hasSpecialCharacters">
+      Password must contain Special character
+    </span>
+  </small>
 
   <div formGroupName="address">
     <label for="street">Street</label>

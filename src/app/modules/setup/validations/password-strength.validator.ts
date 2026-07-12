@@ -20,10 +20,13 @@ export const passwordStrengthValidator: ValidatorFn = (
   if( !valid) {
     return {
       passwordStrength: {
-        hasUpperCase,
+        hasUpperCase : {
+          valid : hasUpperCase,
+          message: "Password must be at least one uppercase character"
+        },
         hasLowerCase,
         hasNumber,
-        hasSpecialCharacters
+        hasSpecialCharacters,
       }
     }
   }
