@@ -3,12 +3,14 @@ import { CommonModule } from '@angular/common';
 import { BasicComponent } from './components/basic/basic.component';
 import {RxjsRoutingModule} from "./rxjs-routing.module";
 import {ReactiveFormsModule} from "@angular/forms";
+import { StreamsComponent } from './component/streams/streams.component';
 
 
 
 @NgModule({
   declarations: [
-    BasicComponent
+    BasicComponent,
+    StreamsComponent
   ],
   imports: [
     RxjsRoutingModule,
